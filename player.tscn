@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://player.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://flail.gd" type="Script" id=3]
+[ext_resource path="res://spiked_ball.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[node name="player" type="Node2D" index="0"]
+
+[node name="string" type="Line2D" parent="." index="0"]
+
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 10.0
+default_color = Color( 0.4, 0.5, 1, 1 )
+texture_mode = -1117260115
+sharp_limit = 2.0
+round_precision = 8
+
+[node name="player_kb" type="KinematicBody2D" parent="." index="1"]
+
+input_pickable = false
+collision_layer = 2
+collision_mask = 2
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "collision" ]
+
+[node name="player_collision" type="CollisionShape2D" parent="player_kb" index="0"]
+
+scale = Vector2( 2.5, 2.5 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="player_sprite" type="Sprite" parent="player_kb" index="1"]
+
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Region", "Transform" ]
+
+[node name="flail" type="RigidBody2D" parent="." index="2"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 3 )
+_sections_unfolded = [ "Applied Forces", "Collision", "Pickable", "collision" ]
+
+[node name="flail_collision" type="CollisionShape2D" parent="flail" index="0"]
+
+shape = SubResource( 2 )
+
+[node name="flail_sprite" type="Sprite" parent="flail" index="1"]
+
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Region", "Transform", "Z Index" ]
+
+
